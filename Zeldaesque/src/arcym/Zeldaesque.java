@@ -6,6 +6,8 @@ import org.newdawn.slick.tiled.*;
 
 public class Zeldaesque extends BasicGame
 {
+	private TiledMap room1;
+	private TiledMap room2;
 	private TiledMap room;
 	private Image img;
 	
@@ -23,7 +25,8 @@ public class Zeldaesque extends BasicGame
 	{
 		try
 		{
-			room = new TiledMap("lvl/room.tmx");
+			room = room1 = new TiledMap("lvl/room1.tmx");
+			room2 = new TiledMap("lvl/room2.tmx");
 			img = new Image("res/hero.png");
 		}
 		catch (SlickException error)
@@ -65,6 +68,17 @@ public class Zeldaesque extends BasicGame
 				x += speed * delta;
 			}
 		}
+		
+		if(room == room1 && y < 0 - (48/2))
+		{
+			room = room2;
+			y = 7 * 64 - (48/2) - 2;
+		}
+		else if(room == room2 && y > 7 * 64 - (48/2) - 1)
+		{
+			room = room1;
+			y = 0 - (48/2);
+		}
 	}
 	
 	public void render(GameContainer container, Graphics g) throws SlickException
@@ -78,7 +92,8 @@ public class Zeldaesque extends BasicGame
 		int tx = ((int)x + (48/2)) / 64;
 		int ty = ((int)y + (48/2)) / 64;
 		
-		if(tx < 0 || tx > 11-1 || ty < 0 || ty > 7-1)
+		if(tx < 0 || tx > 11-1
+		|| ty < 0 || ty > 7-1)
 		{
 			return false;
 		}
