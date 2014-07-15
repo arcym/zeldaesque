@@ -11,6 +11,7 @@ public class Zeldaesque extends BasicGame
 	
 	private float x = 64 * 4;
 	private float y = 64 * 4;
+	private float speed = 0.1f;
 	
 	public Zeldaesque()
 	{
@@ -33,12 +34,58 @@ public class Zeldaesque extends BasicGame
 	
 	public void update(GameContainer container, int delta) throws SlickException
 	{
+		Input input = container.getInput();
+		
+		if(input.isKeyDown(Input.KEY_UP))
+		{
+			if(isWalkable(x, y - speed * delta))
+			{
+				y -= speed * delta;
+			}
+		}
+		else if(input.isKeyDown(Input.KEY_DOWN))
+		{
+			if(isWalkable(x, y + speed * delta))
+			{
+				y += speed * delta;
+			}
+		}
+		
+		if(input.isKeyDown(Input.KEY_LEFT))
+		{
+			if(isWalkable(x - speed * delta, y))
+			{
+				x -= speed * delta;
+			}
+		}
+		else if(input.isKeyDown(Input.KEY_RIGHT))
+		{
+			if(isWalkable(x + speed * delta, y))
+			{
+				x += speed * delta;
+			}
+		}
 	}
 	
 	public void render(GameContainer container, Graphics g) throws SlickException
 	{
 		room.render(0, 0);
 		img.draw((int)x, (int)y);
+	}
+	
+	private boolean isWalkable(float x, float y)
+	{
+		int tx = ((int)x + (48/2)) / 64;
+		int ty = ((int)y + (48/2)) / 64;
+		
+		if(tx < 0 || tx > 11-1 || ty < 0 || ty > 7-1)
+		{
+			return false;
+		}
+		
+		int tid = room.getTileId(tx, ty, 0);
+		
+		return room.getTileProperty(tid, "blocked", "false").equals("false");
 	}
 	
 	public static AppGameContainer container;
