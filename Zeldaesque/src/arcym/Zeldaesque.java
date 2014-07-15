@@ -7,6 +7,10 @@ import org.newdawn.slick.tiled.*;
 public class Zeldaesque extends BasicGame
 {
 	private TiledMap room;
+	private Image img;
+	
+	private float x = 64 * 4;
+	private float y = 64 * 4;
 	
 	public Zeldaesque()
 	{
@@ -19,6 +23,7 @@ public class Zeldaesque extends BasicGame
 		try
 		{
 			room = new TiledMap("lvl/room.tmx");
+			img = new Image("res/hero.png");
 		}
 		catch (SlickException error)
 		{
@@ -33,6 +38,7 @@ public class Zeldaesque extends BasicGame
 	public void render(GameContainer container, Graphics g) throws SlickException
 	{
 		room.render(0, 0);
+		img.draw((int)x, (int)y);
 	}
 	
 	public static AppGameContainer container;
