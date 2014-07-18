@@ -6,14 +6,13 @@ import org.newdawn.slick.tiled.*;
 
 public class Zeldaesque extends BasicGame
 {
+	private TiledMap room;
 	private TiledMap room1;
 	private TiledMap room2;
-	private TiledMap room;
-	private Image img;
 	
-	private float x = 64 * 4;
-	private float y = 64 * 4;
-	private float speed = 0.1f;
+	private Hero link;
+	
+	private final int SCALE = 64;
 	
 	public Zeldaesque()
 	{
@@ -27,7 +26,8 @@ public class Zeldaesque extends BasicGame
 		{
 			room = room1 = new TiledMap("lvl/room1.tmx");
 			room2 = new TiledMap("lvl/room2.tmx");
-			img = new Image("res/hero.png");
+			
+			link = new Hero(4 * room.getTileWidth(), 4 * room.getTileHeight()); 
 		}
 		catch (SlickException error)
 		{
@@ -38,38 +38,9 @@ public class Zeldaesque extends BasicGame
 	public void update(GameContainer container, int delta) throws SlickException
 	{
 		Input input = container.getInput();
+		link.update(input, delta);
 		
-		if(input.isKeyDown(Input.KEY_UP))
-		{
-			if(isWalkable(x, y - speed * delta))
-			{
-				y -= speed * delta;
-			}
-		}
-		else if(input.isKeyDown(Input.KEY_DOWN))
-		{
-			if(isWalkable(x, y + speed * delta))
-			{
-				y += speed * delta;
-			}
-		}
-		
-		if(input.isKeyDown(Input.KEY_LEFT))
-		{
-			if(isWalkable(x - speed * delta, y))
-			{
-				x -= speed * delta;
-			}
-		}
-		else if(input.isKeyDown(Input.KEY_RIGHT))
-		{
-			if(isWalkable(x + speed * delta, y))
-			{
-				x += speed * delta;
-			}
-		}
-		
-		if(room == room1 && y < 0 - (48/2))
+		/*if(room == room1 && y < 0 - (48/2))
 		{
 			room = room2;
 			y = 7 * 64 - (48/2) - 2;
@@ -78,32 +49,31 @@ public class Zeldaesque extends BasicGame
 		{
 			room = room1;
 			y = 0 - (48/2);
-		}
+		}*/
 	}
 	
 	public void render(GameContainer container, Graphics g) throws SlickException
 	{
 		room.render(0, 0);
-		img.draw((int)x, (int)y);
+		link.render();
 	}
 	
 	private boolean isWalkable(float x, float y)
 	{
-		int tx = ((int)x + (48/2)) / 64;
-		int ty = ((int)y + (48/2)) / 64;
+		int tx = ((int)x + (link.getWidth() / 2)) / room.getTileWidth();
+		int ty = ((int)y + (link.getHeight() / 2)) / room.getTileHeight();
 		
-		if(tx < 0 || tx > 11-1
-		|| ty < 0 || ty > 7-1)
+		if(tx < 0 || tx > room.getWidth()-1
+		|| ty < 0 || ty > room.getHeight()-1)
 		{
-			return false;
+			return true;
 		}
 		
 		int tid = room.getTileId(tx, ty, 0);
-		
 		return room.getTileProperty(tid, "blocked", "false").equals("false");
 	}
 	
-	public static AppGameContainer container;
+	
 	
 	public static void main(String[] args)
 	{
@@ -118,4 +88,6 @@ public class Zeldaesque extends BasicGame
 			System.out.println(error.getMessage());
 		}
 	}
+	
+	public static AppGameContainer container;
 }
