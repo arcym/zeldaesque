@@ -10,11 +10,14 @@ public class Hero
 	private float y;
 	private Image img;
 	private float speed = 0.1f;
+	private Room room;
 	
-	public Hero(float x, float y) throws SlickException
+	public Hero(float x, float y, Room room) throws SlickException
 	{
-		this.x = x;
-		this.y = y;
+		this.room = room;
+		
+		this.x = (x + 0.5f) * room.getTileWidth();
+		this.y = (y + 0.5f) * room.getTileHeight();
 		
 		this.img = new Image("res/hero.png");
 	}
@@ -23,14 +26,14 @@ public class Hero
 	{
 		if(input.isKeyDown(Input.KEY_UP))
 		{
-			//if(isWalkable(x, y - speed * delta))
+			if(room.isWalkable(x, y - speed * delta))
 			{
 				y -= speed * delta;
 			}
 		}
 		else if(input.isKeyDown(Input.KEY_DOWN))
 		{
-			//if(isWalkable(x, y + speed * delta))
+			if(room.isWalkable(x, y + speed * delta))
 			{
 				y += speed * delta;
 			}
@@ -38,14 +41,14 @@ public class Hero
 		
 		if(input.isKeyDown(Input.KEY_LEFT))
 		{
-			//if(isWalkable(x - speed * delta, y))
+			if(room.isWalkable(x - speed * delta, y))
 			{
 				x -= speed * delta;
 			}
 		}
 		else if(input.isKeyDown(Input.KEY_RIGHT))
 		{
-			//if(isWalkable(x + speed * delta, y))
+			if(room.isWalkable(x + speed * delta, y))
 			{
 				x += speed * delta;
 			}
@@ -54,7 +57,7 @@ public class Hero
 	
 	public void render()
 	{
-		img.draw((int)x, (int)y);
+		img.draw((int)x - (getWidth() / 2), (int)y - (getHeight() / 2));
 	}
 	
 	public int getWidth()

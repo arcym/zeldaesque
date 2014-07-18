@@ -6,10 +6,7 @@ import org.newdawn.slick.tiled.*;
 
 public class Zeldaesque extends BasicGame
 {
-	private TiledMap room;
-	private TiledMap room1;
-	private TiledMap room2;
-	
+	private Room room;
 	private Hero link;
 	
 	private final int SCALE = 64;
@@ -24,10 +21,8 @@ public class Zeldaesque extends BasicGame
 	{
 		try
 		{
-			room = room1 = new TiledMap("lvl/room1.tmx");
-			room2 = new TiledMap("lvl/room2.tmx");
-			
-			link = new Hero(4 * room.getTileWidth(), 4 * room.getTileHeight()); 
+			room = new Room("lvl/room1.tmx");
+			link = new Hero(4, 4, room);
 		}
 		catch (SlickException error)
 		{
@@ -52,25 +47,10 @@ public class Zeldaesque extends BasicGame
 		}*/
 	}
 	
-	public void render(GameContainer container, Graphics g) throws SlickException
+	public void render(GameContainer container, Graphics gfx) throws SlickException
 	{
-		room.render(0, 0);
+		room.render();
 		link.render();
-	}
-	
-	private boolean isWalkable(float x, float y)
-	{
-		int tx = ((int)x + (link.getWidth() / 2)) / room.getTileWidth();
-		int ty = ((int)y + (link.getHeight() / 2)) / room.getTileHeight();
-		
-		if(tx < 0 || tx > room.getWidth()-1
-		|| ty < 0 || ty > room.getHeight()-1)
-		{
-			return true;
-		}
-		
-		int tid = room.getTileId(tx, ty, 0);
-		return room.getTileProperty(tid, "blocked", "false").equals("false");
 	}
 	
 	
