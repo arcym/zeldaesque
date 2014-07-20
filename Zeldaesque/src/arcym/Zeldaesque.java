@@ -6,7 +6,7 @@ import org.newdawn.slick.tiled.*;
 
 public class Zeldaesque extends BasicGame
 {
-	private TiledRoom room;
+	private Dungeon dungeon;
 	private Hero link;
 	
 	private final int SCALE = 64;
@@ -21,8 +21,8 @@ public class Zeldaesque extends BasicGame
 	{
 		try
 		{
-			room = new TiledRoom("lvl/room1.tmx");
-			link = new Hero(4, 4, room);
+			dungeon = new Dungeon();
+			link = new Hero(4, 4, dungeon);
 		}
 		catch (SlickException error)
 		{
@@ -34,22 +34,11 @@ public class Zeldaesque extends BasicGame
 	{
 		Input input = container.getInput();
 		link.update(input, delta);
-		
-		/*if(room == room1 && y < 0 - (48/2))
-		{
-			room = room2;
-			y = 7 * 64 - (48/2) - 2;
-		}
-		else if(room == room2 && y > 7 * 64 - (48/2) - 1)
-		{
-			room = room1;
-			y = 0 - (48/2);
-		}*/
 	}
 	
 	public void render(GameContainer container, Graphics gfx) throws SlickException
 	{
-		room.render();
+		dungeon.render();
 		link.render();
 	}
 	

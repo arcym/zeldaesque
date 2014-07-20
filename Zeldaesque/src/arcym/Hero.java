@@ -10,14 +10,14 @@ public class Hero
 	private float y;
 	private Image img;
 	private float speed = 0.1f;
-	private TiledRoom room;
+	private Dungeon dungeon;
 	
-	public Hero(float x, float y, TiledRoom room) throws SlickException
+	public Hero(float x, float y, Dungeon dungeon) throws SlickException
 	{
-		this.room = room;
+		this.x = (x + 0.5f) * dungeon.room.getTileWidth();
+		this.y = (y + 0.5f) * dungeon.room.getTileHeight();
 		
-		this.x = (x + 0.5f) * room.getTileWidth();
-		this.y = (y + 0.5f) * room.getTileHeight();
+		this.dungeon = dungeon;
 		
 		this.img = new Image("res/hero.png");
 	}
@@ -28,23 +28,23 @@ public class Hero
 	{
 		if(input.isKeyDown(Input.KEY_UP))
 		{
-			if(room.isWalkable(x, y - speed * delta))
+			if(dungeon.room.isWalkable(x, y - speed * delta))
 			{
 				y -= speed * delta;
 				
 				if(y < 0)
 				{
-					y = room.getPixelHeight();
+					y = dungeon.room.getPixelHeight();
 				}
 			}
 		}
 		else if(input.isKeyDown(Input.KEY_DOWN))
 		{
-			if(room.isWalkable(x, y + speed * delta))
+			if(dungeon.room.isWalkable(x, y + speed * delta))
 			{
 				y += speed * delta;
 				
-				if(y > room.getPixelHeight())
+				if(y > dungeon.room.getPixelHeight())
 				{
 					y = 0;
 				}
@@ -53,23 +53,23 @@ public class Hero
 		
 		if(input.isKeyDown(Input.KEY_LEFT))
 		{
-			if(room.isWalkable(x - speed * delta, y))
+			if(dungeon.room.isWalkable(x - speed * delta, y))
 			{
 				x -= speed * delta;
 				
 				if(x < 0)
 				{
-					x = room.getPixelWidth();
+					x = dungeon.room.getPixelWidth();
 				}
 			}
 		}
 		else if(input.isKeyDown(Input.KEY_RIGHT))
 		{
-			if(room.isWalkable(x + speed * delta, y))
+			if(dungeon.room.isWalkable(x + speed * delta, y))
 			{
 				x += speed * delta;
 				
-				if(x > room.getPixelWidth())
+				if(x > dungeon.room.getPixelWidth())
 				{
 					x = 0;
 				}

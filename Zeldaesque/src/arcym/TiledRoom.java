@@ -10,11 +10,6 @@ public class TiledRoom extends TiledMap
 		 super(filepath);
 	}
 	
-	public void render()
-	{
-		render(0, 0);
-	}
-	
 	public int getPixelWidth()
 	{
 		return getWidth() * getTileWidth();
