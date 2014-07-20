@@ -5,6 +5,11 @@ import org.newdawn.slick.tiled.TiledMap;
 
 public class TiledRoom extends TiledMap
 {
+	public TiledRoom west;
+	public TiledRoom east;
+	public TiledRoom south;
+	public TiledRoom north;
+	
 	public TiledRoom(String filepath) throws SlickException
 	{
 		 super(filepath);

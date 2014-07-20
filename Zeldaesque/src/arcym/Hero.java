@@ -35,6 +35,7 @@ public class Hero
 				if(y < 0)
 				{
 					y = dungeon.room.getPixelHeight();
+					dungeon.move(Direction.NORTH);
 				}
 			}
 		}
@@ -47,6 +48,7 @@ public class Hero
 				if(y > dungeon.room.getPixelHeight())
 				{
 					y = 0;
+					dungeon.move(Direction.SOUTH);
 				}
 			}
 		}
@@ -60,6 +62,7 @@ public class Hero
 				if(x < 0)
 				{
 					x = dungeon.room.getPixelWidth();
+					dungeon.move(Direction.WEST);
 				}
 			}
 		}
@@ -72,6 +75,7 @@ public class Hero
 				if(x > dungeon.room.getPixelWidth())
 				{
 					x = 0;
+					dungeon.move(Direction.EAST);
 				}
 			}
 		}
