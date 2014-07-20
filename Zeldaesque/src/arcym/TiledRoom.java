@@ -12,7 +12,17 @@ public class TiledRoom extends TiledMap
 	
 	public void render()
 	{
-		this.render(0, 0);
+		render(0, 0);
+	}
+	
+	public int getPixelWidth()
+	{
+		return getWidth() * getTileWidth();
+	}
+	
+	public int getPixelHeight()
+	{
+		return getHeight() * getTileHeight();
 	}
 	
 	public boolean isWalkable(float x, float y)
@@ -26,7 +36,7 @@ public class TiledRoom extends TiledMap
 			return true;
 		}
 		
-		int tid = this.getTileId(tx, ty, 0);
-		return this.getTileProperty(tid, "blocked", "false").equals("false");
+		int tid = getTileId(tx, ty, 0);
+		return getTileProperty(tid, "blocked", "false").equals("false");
 	}
 }

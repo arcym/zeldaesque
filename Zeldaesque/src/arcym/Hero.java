@@ -22,6 +22,8 @@ public class Hero
 		this.img = new Image("res/hero.png");
 	}
 	
+	private int i = 0;
+	
 	public void update(Input input, int delta)
 	{
 		if(input.isKeyDown(Input.KEY_UP))
@@ -29,6 +31,11 @@ public class Hero
 			if(room.isWalkable(x, y - speed * delta))
 			{
 				y -= speed * delta;
+				
+				if(y < 0)
+				{
+					y = room.getPixelHeight();
+				}
 			}
 		}
 		else if(input.isKeyDown(Input.KEY_DOWN))
@@ -36,6 +43,11 @@ public class Hero
 			if(room.isWalkable(x, y + speed * delta))
 			{
 				y += speed * delta;
+				
+				if(y > room.getPixelHeight())
+				{
+					y = 0;
+				}
 			}
 		}
 		
@@ -44,6 +56,11 @@ public class Hero
 			if(room.isWalkable(x - speed * delta, y))
 			{
 				x -= speed * delta;
+				
+				if(x < 0)
+				{
+					x = room.getPixelWidth();
+				}
 			}
 		}
 		else if(input.isKeyDown(Input.KEY_RIGHT))
@@ -51,6 +68,11 @@ public class Hero
 			if(room.isWalkable(x + speed * delta, y))
 			{
 				x += speed * delta;
+				
+				if(x > room.getPixelWidth())
+				{
+					x = 0;
+				}
 			}
 		}
 	}
