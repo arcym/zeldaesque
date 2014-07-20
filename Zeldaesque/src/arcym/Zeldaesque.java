@@ -6,7 +6,7 @@ import org.newdawn.slick.tiled.*;
 
 public class Zeldaesque extends BasicGame
 {
-	private Room room;
+	private TiledRoom room;
 	private Hero link;
 	
 	private final int SCALE = 64;
@@ -21,7 +21,7 @@ public class Zeldaesque extends BasicGame
 	{
 		try
 		{
-			room = new Room("lvl/room1.tmx");
+			room = new TiledRoom("lvl/room1.tmx");
 			link = new Hero(4, 4, room);
 		}
 		catch (SlickException error)

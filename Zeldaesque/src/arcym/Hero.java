@@ -10,9 +10,9 @@ public class Hero
 	private float y;
 	private Image img;
 	private float speed = 0.1f;
-	private Room room;
+	private TiledRoom room;
 	
-	public Hero(float x, float y, Room room) throws SlickException
+	public Hero(float x, float y, TiledRoom room) throws SlickException
 	{
 		this.room = room;
 		
