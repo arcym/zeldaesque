@@ -26,11 +26,20 @@ public class Hero
 	
 	public void update(Input input, int delta)
 	{
+		float step = speed;
+		
+		if(input.isKeyDown(Input.KEY_LSHIFT))
+		{
+			step += speed;
+		}
+		
+		step *= delta;
+		
 		if(input.isKeyDown(Input.KEY_UP))
 		{
-			if(dungeon.room.isWalkable(x, y - speed * delta))
+			if(dungeon.room.isWalkable(x, y - step))
 			{
-				y -= speed * delta;
+				y -= step;
 				
 				if(y < 0)
 				{
@@ -41,9 +50,9 @@ public class Hero
 		}
 		else if(input.isKeyDown(Input.KEY_DOWN))
 		{
-			if(dungeon.room.isWalkable(x, y + speed * delta))
+			if(dungeon.room.isWalkable(x, y + step))
 			{
-				y += speed * delta;
+				y += step;
 				
 				if(y > dungeon.room.getPixelHeight())
 				{
@@ -55,9 +64,9 @@ public class Hero
 		
 		if(input.isKeyDown(Input.KEY_LEFT))
 		{
-			if(dungeon.room.isWalkable(x - speed * delta, y))
+			if(dungeon.room.isWalkable(x - step, y))
 			{
-				x -= speed * delta;
+				x -= step;
 				
 				if(x < 0)
 				{
@@ -68,9 +77,9 @@ public class Hero
 		}
 		else if(input.isKeyDown(Input.KEY_RIGHT))
 		{
-			if(dungeon.room.isWalkable(x + speed * delta, y))
+			if(dungeon.room.isWalkable(x + step, y))
 			{
-				x += speed * delta;
+				x += step;
 				
 				if(x > dungeon.room.getPixelWidth())
 				{
