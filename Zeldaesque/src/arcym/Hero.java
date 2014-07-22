@@ -9,7 +9,7 @@ public class Hero
 	private float x;
 	private float y;
 	private Image img;
-	private float speed = 0.1f;
+	private float speed = 0.15f;
 	private Dungeon dungeon;
 	
 	public Hero(float x, float y, Dungeon dungeon) throws SlickException

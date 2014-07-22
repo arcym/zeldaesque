@@ -22,7 +22,7 @@ public class Zeldaesque extends BasicGame
 		try
 		{
 			dungeon = new Dungeon();
-			link = new Hero(4, 4, dungeon);
+			link = new Hero(6, 4, dungeon);
 		}
 		catch (SlickException error)
 		{
@@ -49,7 +49,7 @@ public class Zeldaesque extends BasicGame
 		try
 		{
 			container = new AppGameContainer(new Zeldaesque());
-			container.setDisplayMode(11*64, 7*64, false);
+			container.setDisplayMode(13*64, 9*64, false);
 			container.start();
 		}
 		catch(Exception error)
