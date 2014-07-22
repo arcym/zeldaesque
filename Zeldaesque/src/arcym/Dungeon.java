@@ -8,7 +8,7 @@ public class Dungeon
 	
 	public Dungeon() throws SlickException
 	{
-		room = new TiledRoom();
+		room = new TiledRoom("./lvl/blank.tmx");
 		room.connectEasternRoom(new TiledRoom());
 		room.connectWesternRoom(new TiledRoom());
 	}

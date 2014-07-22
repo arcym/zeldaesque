@@ -1,5 +1,8 @@
 package arcym;
 
+import java.io.File;
+import java.util.Random;
+
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.tiled.TiledMap;
 
@@ -12,7 +15,12 @@ public class TiledRoom extends TiledMap
 	
 	public TiledRoom() throws SlickException
 	{
-		super("lvl/blank.tmx");
+		super(getRandomRoomLayout());
+	}
+	
+	public TiledRoom(String roomlayout) throws SlickException
+	{
+		super(roomlayout);
 	}
 	
 	public int getPixelWidth()
@@ -106,5 +114,12 @@ public class TiledRoom extends TiledMap
 		
 		int tid = getTileId(tx, ty, 0);
 		return getTileProperty(tid, "blocked", "false").equals("false");
+	}
+	
+	public static String getRandomRoomLayout()
+	{
+		Random random = new Random();
+		File[] list = new File("./lvl").listFiles();
+		return "./lvl/" + list[random.nextInt(list.length)].getName();
 	}
 }
