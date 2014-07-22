@@ -10,9 +10,9 @@ public class TiledRoom extends TiledMap
 	public TiledRoom southernNeighbor;
 	public TiledRoom northernNeighbor;
 	
-	public TiledRoom(String filepath) throws SlickException
+	public TiledRoom() throws SlickException
 	{
-		 super(filepath);
+		super("lvl/blank.tmx");
 	}
 	
 	public int getPixelWidth()
