@@ -49,7 +49,7 @@ public class Zeldaesque extends BasicGame
 		try
 		{
 			container = new AppGameContainer(new Zeldaesque());
-			container.setDisplayMode(13*64, 9*64, false);
+			container.setDisplayMode(11*64, 9*64, false);
 			container.start();
 		}
 		catch(Exception error)
