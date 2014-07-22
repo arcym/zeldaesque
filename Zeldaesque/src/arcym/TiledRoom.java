@@ -25,60 +25,72 @@ public class TiledRoom extends TiledMap
 		return getHeight() * getTileHeight();
 	}
 	
-	public void setNeighbor(Direction direction, TiledRoom room)
+	public void connectRoom(Direction direction, TiledRoom room)
 	{
 		if(direction == Direction.NORTH)
 		{
-			setNorthernNeighbor(room);
+			connectNorthernRoom(room);
 		}
 		else if(direction == Direction.SOUTH)
 		{
-			setSouthernNeighbor(room);
+			connectSouthernRoom(room);
 		}
 		else if(direction == Direction.EAST)
 		{
-			setEasternNeighbor(room);
+			connectEasternRoom(room);
 		}
 		else if(direction == Direction.WEST)
 		{
-			setWesternNeighbor(room);
+			connectWesternRoom(room);
 		}
 	}
 	
-	public void setNorthernNeighbor(TiledRoom room)
+	public void connectNorthernRoom(TiledRoom that)
 	{
-		this.northernNeighbor = room;
-		this.setTileId(11/2, 0, 0, 1);
-		
-		room.southernNeighbor = this;
-		room.setTileId(11/2, 9-1, 0, 1);
+		this.setNorthernRoom(that);
+		that.setSouthernRoom(this);
 	}
 	
-	public void setSouthernNeighbor(TiledRoom room)
+	public void connectSouthernRoom(TiledRoom that)
 	{
-		this.southernNeighbor = room;
-		this.setTileId(11/2, 9-1, 0, 1);
-		
-		room.northernNeighbor = this;
-		room.setTileId(11/2, 0, 0, 1);
+		this.setSouthernRoom(that);
+		that.setNorthernRoom(this);
 	}
 	
-	public void setEasternNeighbor(TiledRoom room)
+	public void connectEasternRoom(TiledRoom that)
 	{
-		this.easternNeighbor = room;
-		this.setTileId(11-1, 9/2, 0, 1);
-		
-		room.westernNeighbor = this;
-		room.setTileId(0, 9/2, 0, 1);
+		this.setEasternRoom(that);
+		that.setWesternRoom(this);
 	}
 	
-	public void setWesternNeighbor(TiledRoom room)
+	public void connectWesternRoom(TiledRoom that)
 	{
-		this.westernNeighbor = room;
-		this.setTileId(0, 9/2, 0, 1);
-		
-		room.easternNeighbor = this;
-		room.setTileId(11-1, 9/2, 0, 1);
+		this.setWesternRoom(that);
+		that.setEasternRoom(this);
+	}
+	
+	public void setNorthernRoom(TiledRoom room)
+	{
+		northernNeighbor = room;
+		setTileId(11/2, 0, 0, 1);
+	}
+	
+	public void setSouthernRoom(TiledRoom room)
+	{
+		southernNeighbor = room;
+		setTileId(11/2, 9-1, 0, 1);
+	}
+	
+	public void setEasternRoom(TiledRoom room)
+	{
+		easternNeighbor = room;
+		setTileId(11-1, 9/2, 0, 1);
+	}
+	
+	public void setWesternRoom(TiledRoom room)
+	{
+		westernNeighbor = room;
+		setTileId(0, 9/2, 0, 1);
 	}
 	
 	public boolean isWalkable(float x, float y)

@@ -9,10 +9,8 @@ public class Dungeon
 	public Dungeon() throws SlickException
 	{
 		room = new TiledRoom("lvl/blank.tmx");
-		room.setNorthernNeighbor(new TiledRoom("lvl/blank.tmx"));
-		room.setSouthernNeighbor(new TiledRoom("lvl/blank.tmx"));
-		room.setEasternNeighbor(new TiledRoom("lvl/blank.tmx"));
-		room.setWesternNeighbor(new TiledRoom("lvl/blank.tmx"));
+		room.connectEasternRoom(new TiledRoom("lvl/blank.tmx"));
+		room.connectWesternRoom(new TiledRoom("lvl/blank.tmx"));
 	}
 	
 	public void render()
