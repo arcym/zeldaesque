@@ -4,14 +4,14 @@ import org.lwjgl.*;
 import org.newdawn.slick.*;
 import org.newdawn.slick.tiled.*;
 
-public class Zeldaesque extends BasicGame
+public class Dungen extends BasicGame
 {
 	private Dungeon dungeon;
 	private Hero link;
 	
 	private final int SCALE = 64;
 	
-	public Zeldaesque()
+	public Dungen()
 	{
 		super("Zeldaesque");
 	}
@@ -48,7 +48,7 @@ public class Zeldaesque extends BasicGame
 	{
 		try
 		{
-			container = new AppGameContainer(new Zeldaesque());
+			container = new AppGameContainer(new Dungen());
 			container.setDisplayMode(11*64, 9*64, false);
 			container.start();
 		}
